@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const meliScrapping = require('.');
+const meliScrapping = require('./meliScrapping');
 const app = express();
 const port = 3001;
 app.use(cors());

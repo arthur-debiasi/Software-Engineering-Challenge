@@ -9,7 +9,7 @@ import SearchBar from './Components/SearchBar';
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [queryData, setQueryData] = useState({
     query: '',
     category: 'geladeira',
@@ -17,6 +17,7 @@ function App() {
   });
 
   const handleQueryBtn = useCallback(() => {
+    setIsLoading(true);
     const { query, category, web } = queryData;
     axios
       .post('http://localhost:3001/', { query, category, web })

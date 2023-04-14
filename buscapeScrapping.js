@@ -3,14 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 const buscapeScrapping = async (queryTerm, caregoryTerm) => {
-  // const URLcel7 ='https://www.buscape.com.br/search?q=samsung&hitsPerPage=48&refinements%5B0%5D%5Bid%5D=categoryId&refinements%5B0%5D%5Bvalues%5D%5B0%5D=7&page=1&sortBy=default&isDealsPage=false&enableRefinementsSuggestions=true';
-
-  // const URLgel8 = 'https://www.buscape.com.br/search?q=samsung&hitsPerPage=48&refinements%5B0%5D%5Bid%5D=categoryId&refinements%5B0%5D%5Bvalues%5D%5B0%5D=8&page=1&sortBy=default&isDealsPage=false&enableRefinementsSuggestions=true'
-
-  // const URLtve3 = 'https://www.buscape.com.br/search?q=samsung&hitsPerPage=48&refinements%5B0%5D%5Bid%5D=categoryId&refinements%5B0%5D%5Bvalues%5D%5B0%5D=3&page=1&sortBy=default&isDealsPage=false&enableRefinementsSuggestions=true';
-
   let category = '8';
-
   switch (caregoryTerm) {
     case 'celular':
       category = '7';
@@ -42,7 +35,8 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
         .eq(0)
         .find('noscript')
         .html();
-      x = x !== null && x.split('src="')[1].split(' ')[0].split('jpg')[0] + 'jpg';
+      x =
+        x !== null && x.split('src="')[1].split(' ')[0].split('jpg')[0] + 'jpg';
       const title = $(product)
         .find('h2.SearchCard_ProductCard_Name__ZaO5o')
         .text();
@@ -50,8 +44,10 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
         'https://www.buscape.com.br' +
         $(product).find('a.SearchCard_ProductCard_Inner__7JhKb').attr('href');
 
-      const price = $(product).find('[data-testid="product-card::price"]').text();
-      'product-card::price'
+      const price = $(product)
+        .find('[data-testid="product-card::price"]')
+        .text();
+      ('product-card::price');
       const src = !x ? $(product).find('img').attr('src') : x;
       console.log(src);
       productsData.push({
@@ -65,13 +61,22 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
       productsData.map(async (e) => {
         const res = await getHTML(e.href);
         const $ = cheerio.load(res);
-        const descriptionElement = $('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr').children().eq(0).text();
-        const descriptionElement2 = $('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr').children().eq(1).text();
-        // const description =
-        //   descriptionElement.length > 0
-        //     ? descriptionElement.html().replace(/<br>/g, '\n')
-        //     : '';
-        return { ...e, description: descriptionElement + ' ' + descriptionElement2 };
+        const descriptionElement = $(
+          '.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr'
+        )
+          .children()
+          .eq(0)
+          .text();
+        const descriptionElement2 = $(
+          '.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr'
+        )
+          .children()
+          .eq(1)
+          .text();
+        return {
+          ...e,
+          description: descriptionElement + ' ' + descriptionElement2,
+        };
       })
     );
     return addDetails;

@@ -1,5 +1,6 @@
 import React from 'react';
-function SearchBar({ handleChange, handleQueryBtn }) {
+import NoQuery from './NoQuery';
+function SearchBar({ handleChange, handleQueryBtn, noQuery }) {
   return (
     <div>
       <select name='web' onChange={handleChange}>
@@ -19,6 +20,7 @@ function SearchBar({ handleChange, handleQueryBtn }) {
       <button type='button' onClick={handleQueryBtn}>
         Search
       </button>
+      {noQuery && <NoQuery />}
     </div>
   );
 }

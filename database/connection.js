@@ -1,9 +1,12 @@
-import { connect } from 'mongoose'
+const mongoose = require('mongoose');
 
-  const options = {
-  user: 'searchEngine',
-  pass: '6mSpmi7Zk4SApKUF',
-  dbName: 'MyMongoDB',
-};
-
-connect('mongodb://localhost:27017/', options);
+module.exports = async () => {
+  try {
+    await mongoose.connect(
+      'mongodb+srv://searchEngine:6mSpmi7Zk4SApKUF@mymongodb.eydzyig.mongodb.net/test'
+    )
+    console.log('DB connectado!');
+  } catch (error) {
+    console.error(error);
+  }
+}

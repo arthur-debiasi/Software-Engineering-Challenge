@@ -49,7 +49,6 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
         .text();
       ('product-card::price');
       const src = !x ? $(product).find('img').attr('src') : x;
-      console.log(src);
       productsData.push({
         title,
         price,

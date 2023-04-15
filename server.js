@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const meliScrapping = require('./meliScrapping');
+const searchProducts = require('./controller/searchProducts');
 const app = express();
 const port = 3001;
 app.use(cors());
@@ -10,10 +10,7 @@ app.get('/', (req, res) => {
   res.send('Leia o course!');
 });
 
-app.post('/', ({ body: { query, category, site } }, res) => {
-  console.log({ query, category, site });
-  meliScrapping(query, category, 'x').then((message) => res.status(200).json(message));
-});
+app.post('/', searchProducts);
 
 // Inicie o servidor
 app.listen(port, () => {

@@ -9,7 +9,7 @@ function Header({ handleChange, handleQueryBtn, noQuery }) {
       direction='row'
       justifyContent='start'
       alignItems='center'
-      spacing={2}
+      spacing={2  }
     >
       <HagglesIcon />
       <SearchBar

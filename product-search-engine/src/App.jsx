@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ProductCard from './Components/ProductCard';
 import Loading from './Components/Loading';
 import SearchBar from './Components/SearchBar';
+import Header from './Components/Header';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -41,8 +42,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1>Product Search Engine - Leia o Course</h1>
-        <SearchBar
+        <Header
           handleChange={handleChange}
           handleQueryBtn={handleQueryBtn}
           noQuery={noQuery}

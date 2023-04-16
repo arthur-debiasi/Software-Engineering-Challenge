@@ -2,29 +2,25 @@ const allProducts = require('../service/allProducts');
 const buscapeProducts = require('../service/buscapeProducts');
 const meliProducts = require('../service/meliProducts');
 
-
-
-const searchProducts = async ({ body: { query, category, web } }, res) => {
+async function searchProducts({ body: { query, category, web } }, res) {
   try {
+    let callback;
     switch (web) {
       case 'meli':
-        console.log('meli');
-        const meli = await meliProducts(query, category);
-        return res.status(200).json(meli);
+        callback = meliProducts;
+        break;
       case 'buscape':
-        console.log('buscape');
-        const buscape = await buscapeProducts(query, category);
-        return res.status(200).json(buscape);
+        callback = buscapeProducts;
+        break;
       default:
-        console.log('meli e buscape');
-        const results = await allProducts(query, category);
-        return res.status(200).json(results);
+        callback = allProducts;
     }
+    return res.status(200).json(await callback(query, category));
   } catch (error) {
     console.error(error.message);
     console.error(error);
-    res.status(500).json({message: 'Vixi... vixi... VIXI...'})
+    return res.status(500).json({ message: 'Something went wrong... :/' });
   }
-};
+}
 
 module.exports = searchProducts;

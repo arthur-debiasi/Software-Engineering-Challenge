@@ -1,32 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
 import HagglesIcon from './HagglesIcon';
 import SearchBar from './SearchBar';
 
-function Header({ handleChange, handleQueryBtn, noQuery }) {
+function Header() {
   return (
     <Stack
       display="flex"
-      direction="row"
-      justifyContent="start"
+      flexDirection="row"
+      flexWrap="wrap"
+      justifyContent="space-around"
       alignItems="center"
-      spacing={2}
     >
       <HagglesIcon />
-      <SearchBar
-        handleChange={handleChange}
-        handleQueryBtn={handleQueryBtn}
-        noQuery={noQuery}
-      />
+      <SearchBar />
     </Stack>
   );
 }
-
-Header.propTypes = {
-  handleChange: PropTypes.func,
-  handleQueryBtn: PropTypes.func,
-  noQuery: PropTypes.bool,
-}.isRequired;
 
 export default Header;

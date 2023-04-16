@@ -1,8 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
 
-const meliScrapping = async (query, category, _site) => {
+const meliScrapping = async (query, category) => {
   let categoryTerm;
   switch (category) {
     case 'celular':
@@ -32,31 +31,33 @@ const meliScrapping = async (query, category, _site) => {
     $('.ui-search-layout__item').each(async (i, product) => {
       const title = $(product).find('h2.ui-search-item__title').text();
       const href = $(product).find('a.ui-search-link').attr('href');
-      let price = $(product)
-        .find('span.price-tag-amount:nth-child(2)')
-        .text().split('R$');
+      const price = $(product)
+        .find('span.price-tag-amount').text().split('R$');
       const src = $(product)
         .find('img.ui-search-result-image__element')
         .attr('data-src');
-      productsData.push({ title, price: price[price.length === 4 ? 2 : 1], src, href });
+      productsData.push({
+        title, price: price[price.length - 2].replace('.', ''), src, href,
+      });
     });
 
     const addDetails = await Promise.all(
       productsData.map(async (e) => {
-        const res = await getHTML(e.href);
-        const $ = cheerio.load(res);
-        const descriptionElement = $('.ui-pdp-description__content');
-        const description =
-          descriptionElement.length > 0
-            ? descriptionElement.html().replace(/<br>/g, '\n')
-            : '';
-        return { ...e, description: description };
-      })
+        const res2 = await getHTML(e.href);
+        const $2 = cheerio.load(res2);
+        const descriptionElement = $2('.ui-pdp-description__content');
+        const description = descriptionElement.length > 0
+          ? descriptionElement.html().replace(/<br>/g, '\n')
+          : '';
+        return { ...e, description };
+      }),
     );
     return addDetails;
   });
 
   return result;
 };
+
+meliScrapping('galaxy', 'celular');
 
 module.exports = meliScrapping;

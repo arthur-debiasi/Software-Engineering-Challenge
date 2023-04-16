@@ -1,26 +1,87 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button, Chip, Grid, Modal, Paper, Stack, Typography,
+} from '@mui/material';
+import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
+import formatValues from '../utils/formatValues';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  minWidth: '320px',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  overflowY: 'scroll',
+  maxHeight: '500px',
+};
 
 function ProductCard({
   src, title, description, price, href,
 }) {
-  const handleClick = () => {
+  const handleWebClick = () => {
     window.open(href, '_blank');
   };
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Stack display="row" alignItems="center">
-      <img src={src} alt={title} height="200px" />
-      <Stack maxWidth="500px">
-        <h3>{title}</h3>
-        <Stack>
-          <Typography>{description}</Typography>
+    <Grid
+      item
+      md={6}
+      xs={12}
+      component={Paper}
+      elevation={10}
+      sx={
+        {
+          display: 'flex',
+          // flexDirection: 'row',
+          // flexWrap: 'wrap',
+          // justifyContent: 'center',
+        }
+      }
+    >
+      <Box
+        maxWidth="30%"
+        borderRadius="5px"
+        margin="5px"
+        component="img"
+        src={src}
+        alt={title}
+        className="product-image"
+      />
+      <Stack direction="row" flexWrap="wrap" justifyContent="end">
+
+        <Typography variant="h6">{title}</Typography>
+        <Stack alignItems="center" justifyContent="space-around" width="90%" marginLeft="5%">
+          <Chip variant="contained" label="Saiba mais..." onClick={handleOpen} />
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography variant="h6" component="h2">
+                Descrição
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                {description}
+              </Typography>
+            </Box>
+          </Modal>
+          <Typography variant="h6" color="Highlight"><strong>{formatValues(price)}</strong></Typography>
         </Stack>
-        <h4>{price}</h4>
-        <Button onClick={handleClick}>Ir para a web</Button>
+        <Button onClick={handleWebClick}><StorefrontTwoToneIcon /></Button>
       </Stack>
-    </Stack>
+    </Grid>
   );
 }
 

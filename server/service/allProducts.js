@@ -1,4 +1,3 @@
-const buscapeScrapping = require('../buscapeScrapping');
 const QueryProducts = require('../database/Model/QueryProducts');
 const buscapeProducts = require('./buscapeProducts');
 const meliProducts = require('./meliProducts');

@@ -1,13 +1,11 @@
-import React, { useCallback } from 'react';
-import uuid from 'react-uuid';
+import React, { useCallback, useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
-import ProductCard from './Components/ProductCard';
-import Loading from './Components/Loading';
-import SearchBar from './Components/SearchBar';
-import Header from './Components/Header';
+import uuid from 'react-uuid';
+import ProductCard from '../components/ProductCard';
+import Loading from '../components/Loading';
+import Header from '../components/Header';
 
-function App() {
+function Home() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noQuery, setNoQuery] = useState(false);
@@ -27,7 +25,6 @@ function App() {
       axios
         .post('http://localhost:3001/', { query, category, web })
         .then(({ data }) => {
-          console.log(data);
           setProducts(data);
           setIsLoading(false);
         });
@@ -40,8 +37,8 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div>
+      <header>
         <Header
           handleChange={handleChange}
           handleQueryBtn={handleQueryBtn}
@@ -52,7 +49,9 @@ function App() {
         {isLoading ? (
           <Loading />
         ) : (
-          products.map(({ href, title, description, price, src }) => (
+          products.map(({
+            href, title, description, price, src,
+          }) => (
             <ProductCard
               key={uuid()}
               src={src}
@@ -69,4 +68,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

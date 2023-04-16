@@ -1,22 +1,22 @@
 const QueryProducts = require('../database/Model/QueryProducts');
-const meliScrapping = require('../meliScrapping');
+const buscapeScrapping = require('../utils/buscapeScrapping');
 
 const findQuery = async (query, category, web) => {
   const foundQuery = await QueryProducts.findOne({query, category, web});
   return foundQuery;
 }
 
-const meliProducts = async (query, category) => {
-  const haveBeenDone = await findQuery(query, category, 'meli');
+const buscapeProducts = async (query, category) => {
+  const haveBeenDone = await findQuery(query, category, 'buscape');
   if(haveBeenDone) {console.log('haveBeenDone'); return haveBeenDone.products;}
-  const scrapping = await meliScrapping(query, category);
+  const scrapping = await buscapeScrapping(query, category);
   const results = await QueryProducts.create({
     query,
     category,
-    web: 'meli',
+    web: 'buscape',
     products: scrapping,
   });
   return results.products; 
 };
 
-module.exports = meliProducts;
+module.exports = buscapeProducts;

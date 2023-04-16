@@ -3,6 +3,7 @@ const buscapeProducts = require('../service/buscapeProducts');
 const meliProducts = require('../service/meliProducts');
 
 
+
 const searchProducts = async ({ body: { query, category, web } }, res) => {
   try {
     switch (web) {
@@ -20,6 +21,7 @@ const searchProducts = async ({ body: { query, category, web } }, res) => {
         return res.status(200).json(results);
     }
   } catch (error) {
+    console.error(error.message);
     console.error(error);
     res.status(500).json({message: 'Vixi... vixi... VIXI...'})
   }

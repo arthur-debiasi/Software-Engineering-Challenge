@@ -31,7 +31,7 @@ export default function AppProvider({ children }) {
       setIsLoading(true);
       const { query, category, web } = queryData;
       const { data } = await axios
-        .post('http://localhost:3001/', { query, category, web });
+        .post(process.env.REACT_APP_BACK_END, { query, category, web });
       setProducts(data);
       if (data.length === 0) {
         setNotFound(true);

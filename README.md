@@ -1,4 +1,4 @@
-# [Lexart](https://lexartlabs.com/) Software Engineering Challenge - Product Search Engine
+# [Lexart](https://lexartlabs.com/) Software Engineering Challenge - [Product Search Engine](https://haggles.up.railway.app/)
 
 ## 💻 About - [haggles.up.railway.app/](https://haggles.up.railway.app/)
 
@@ -26,7 +26,7 @@ Open a terminal on root directory and use this command for installing client dep
 cd client && npm install
 ```
 
-Open a terminal on root directory and use this command for installing server dependencies
+Open another terminal on root directory and use this command for installing server dependencies
 
 ```bash
 cd server && npm install
@@ -34,13 +34,9 @@ cd server && npm install
 
 ### ⚡ Running the Aplication
 
-Initially, you need to configure your environment:
+Initially, you need to configure your environment variables:
 
 Rename `.env.example` files to `.env`. These files are located in `/client` and `/server`."
-
-```bash
-npm run restore
-```
 
 After that, the server application can be started with:
 
@@ -51,7 +47,7 @@ cd server && npm start
 Or, also with the development script:
 
 ```bash
-cd server && npm start
+cd server && npm run dev
 ```
 
 And the client application can be started with:

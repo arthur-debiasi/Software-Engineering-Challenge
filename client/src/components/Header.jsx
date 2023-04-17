@@ -5,7 +5,6 @@ import SearchBar from './SearchBar';
 import ToggleColorMode from './ToggleColorMode';
 
 function Header() {
-  // const { pallete: { mode } } = useTheme();
   return (
     <Stack
       display="flex"

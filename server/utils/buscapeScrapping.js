@@ -29,7 +29,9 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
     }
   }
 
-  if (await getHTML(URL) === null) { console.log('oi'); return []; }
+  if (await getHTML(URL) === null) {
+    return [];
+  }
 
   const result = await getHTML(URL).then(async (res) => {
     const $ = cheerio.load(res);

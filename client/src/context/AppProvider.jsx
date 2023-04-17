@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import AppContext from './AppContext';
@@ -12,6 +14,12 @@ export default function AppProvider({ children }) {
     query: '',
     category: 'geladeira',
     web: 'all',
+  });
+
+  useEffect(() => {
+    if (queryData.query.length > 0) {
+      setNoQuery(false);
+    }
   });
 
   const handleQueryBtn = useCallback(async () => {

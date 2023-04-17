@@ -47,7 +47,16 @@ function SearchBar() {
         </FormControl>
       </Stack>
 
-      <TextField label="Pesquisa" type="text" name="query" id="query" onChange={handleChange} sx={{ margin: '3px 3px 3px 0px' }} />
+      <TextField
+        error={noQuery}
+        helperText={noQuery ? 'Digite o nome do produto' : ''}
+        label="Pesquisa"
+        type="text"
+        name="query"
+        id="query"
+        onChange={handleChange}
+        sx={{ margin: '3px 3px 3px 0px' }}
+      />
 
       <Button type="button" onClick={handleQueryBtn}>
         <SearchIcon />

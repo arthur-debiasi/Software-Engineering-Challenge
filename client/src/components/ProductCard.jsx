@@ -65,8 +65,7 @@ function ProductCard({
 
           {price ? (
             <Typography
-              variant="h4"
-              color="Highlight"
+              variant="priceValue"
             >
               <strong>{formatValues(price)}</strong>
 
@@ -91,7 +90,7 @@ function ProductCard({
             </Typography>
           </Box>
         </Modal>
-        <Button onClick={handleWebClick}><StorefrontTwoToneIcon /></Button>
+        <Button onClick={handleWebClick} color="secondary"><StorefrontTwoToneIcon color="primary" /></Button>
       </Stack>
     </Grid>
   );

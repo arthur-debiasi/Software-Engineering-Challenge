@@ -59,7 +59,7 @@ function SearchBar() {
       />
 
       <Button type="button" onClick={handleQueryBtn}>
-        <SearchIcon />
+        <SearchIcon color="primary" />
       </Button>
       {noQuery && <NoQuery />}
     </Stack>

@@ -30,23 +30,19 @@ const meliScrapping = async (query, category) => {
     }
   }
 
-  if (await getHTML(URL) === null) { console.log('oi'); return []; }
+  if (await getHTML(URL) === null) {
+    return [];
+  }
 
-  const result = await getHTML(URL).then(async (res) => {
-    const $ = cheerio.load(res);
+  const result = await getHTML(URL).then(async (data) => {
+    const $ = cheerio.load(data);
     $('.ui-search-layout__item').each(async (i, product) => {
       const title = $(product).find('h2.ui-search-item__title').text();
       const href = $(product).find('a.ui-search-link').attr('href');
-      // const price = $(product)
-      //   .find('span.price-tag-amount').text().split('R$');
       const src = $(product)
         .find('img.ui-search-result-image__element')
         .attr('data-src');
-      productsData.push({
-        title,
-        src,
-        href,
-      });
+      productsData.push({ title, src, href });
     });
 
     const addDetails = await Promise.all(

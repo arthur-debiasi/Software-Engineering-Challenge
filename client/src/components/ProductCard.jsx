@@ -18,12 +18,11 @@ function ProductCard({
   const { mode } = useContext(ColorModeContext);
 
   const bgColor = mode === 'light' ? 'darkgray' : 'lightgray';
-  const titleColor = mode === 'light' ? 'white' : 'black';
 
   return (
     <Grid
       item
-      md={6}
+      md={8}
       xs={12}
       component={Paper}
       sx={{ display: 'flex', alignItems: 'center', backgroundColor: bgColor }}
@@ -36,22 +35,32 @@ function ProductCard({
         padding="10px"
       >
         <Box
-          maxWidth="80%"
-          maxHeight="240px"
+          width="240px"
+          height="240px"
           borderRadius="5px"
           margin="5px"
-          component="img"
-          src={src}
-          alt={title}
-          className="product-image"
-        />
-        <Stack display="flex" justifyContent="space-between" spacing={2}>
-          <Stack display="flex" alignItems="center" justifyContent="end" width="90%" marginLeft="5%">
-            <Typography variant="h5" color={titleColor}>{title}</Typography>
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ backgroundColor: 'white' }}
+        >
+
+          <Box
+            maxWidth="100%"
+            maxHeight="100%"
+            sx={{ objectFit: 'cover', overflow: 'hidden' }}
+            component="img"
+            src={src}
+            alt={title}
+          />
+        </Box>
+        <Stack flexGrow={2}>
+          <Stack display="flex" alignItems="center" width="90%" marginLeft="5%">
+            <Typography variant="h5" color="black">{title}</Typography>
             {price ? (<ProductPrice price={price} />) : (<NotFoundMsg />)}
           </Stack>
 
-          <Stack direction="row" justifyContent="space-between">
+          <Stack direction="row" justifyContent="space-between" width="100%">
             <DescriptionModal description={description} />
             <Button onClick={handleWebClick}>
               <StorefrontTwoToneIcon color="primary" sx={{ fontSize: '3em' }} />

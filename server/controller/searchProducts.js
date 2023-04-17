@@ -4,21 +4,19 @@ const meliProducts = require('../service/meliProducts');
 
 async function searchProducts({ body: { query, category, web } }, res) {
   try {
-    let callback;
+    let service;
     switch (web) {
       case 'meli':
-        callback = meliProducts;
+        service = meliProducts;
         break;
       case 'buscape':
-        callback = buscapeProducts;
+        service = buscapeProducts;
         break;
       default:
-        callback = allProducts;
+        service = allProducts;
     }
-    return res.status(200).json(await callback(query, category));
+    return res.status(200).json(await service(query, category));
   } catch (error) {
-    console.error(error.message);
-    console.error(error);
     return res.status(500).json({ message: 'Something went wrong... :/' });
   }
 }

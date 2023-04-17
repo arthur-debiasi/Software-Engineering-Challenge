@@ -22,22 +22,30 @@ const meliScrapping = async (query, category) => {
   const productsData = [];
 
   async function getHTML(url) {
-    const { data } = await axios.get(url);
-    return data;
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
+
+  if (await getHTML(URL) === null) { console.log('oi'); return []; }
 
   const result = await getHTML(URL).then(async (res) => {
     const $ = cheerio.load(res);
     $('.ui-search-layout__item').each(async (i, product) => {
       const title = $(product).find('h2.ui-search-item__title').text();
       const href = $(product).find('a.ui-search-link').attr('href');
-      const price = $(product)
-        .find('span.price-tag-amount').text().split('R$');
+      // const price = $(product)
+      //   .find('span.price-tag-amount').text().split('R$');
       const src = $(product)
         .find('img.ui-search-result-image__element')
         .attr('data-src');
       productsData.push({
-        title, price: price[price.length - 2].replace('.', ''), src, href,
+        title,
+        src,
+        href,
       });
     });
 
@@ -46,18 +54,17 @@ const meliScrapping = async (query, category) => {
         const res2 = await getHTML(e.href);
         const $2 = cheerio.load(res2);
         const descriptionElement = $2('.ui-pdp-description__content');
+        const price = $2('div.ui-pdp-price__second-line').find('.andes-money-amount__fraction').eq(0).text()
+          .replace('.', '');
         const description = descriptionElement.length > 0
           ? descriptionElement.html().replace(/<br>/g, '\n')
           : '';
-        return { ...e, description };
+        return { ...e, description, price: Number(price) };
       }),
     );
     return addDetails;
   });
-
   return result;
 };
-
-meliScrapping('galaxy', 'celular');
 
 module.exports = meliScrapping;

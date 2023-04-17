@@ -14,18 +14,22 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
       category = '3';
       break;
     default:
-      break;
+      throw new Error('Categoria inválida!');
   }
-  const URLcat = `https://www.buscape.com.br/search?q=${queryTerm}&hitsPerPage=48&refinements%5B0%5D%5Bid%5D=categoryId&refinements%5B0%5D%5Bvalues%5D%5B0%5D=${category}&page=1&sortBy=default&isDealsPage=false&enableRefinementsSuggestions=true`;
+  const URL = `https://www.buscape.com.br/search?q=${queryTerm}&hitsPerPage=48&refinements%5B0%5D%5Bid%5D=categoryId&refinements%5B0%5D%5Bvalues%5D%5B0%5D=${category}&page=1&sortBy=default&isDealsPage=false&enableRefinementsSuggestions=true`;
 
   const productsData = [];
 
   async function getHTML(url) {
-    const { data } = await axios.get(url);
-    return data;
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      return null;
+    }
   }
 
-  const URL = URLcat;
+  if (await getHTML(URL) === null) { console.log('oi'); return []; }
 
   const result = await getHTML(URL).then(async (res) => {
     const $ = cheerio.load(res);
@@ -77,10 +81,6 @@ const buscapeScrapping = async (queryTerm, caregoryTerm) => {
       }),
     );
     return addDetails;
-    // fs.writeFile('moviesData.json', JSON.stringify(productsData), (err) => {
-    //   if (err) throw err;
-    //   console.log('file successfully saved');
-    // });
   });
 
   return result;

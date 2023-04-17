@@ -9,7 +9,7 @@ const theme = createTheme({
   },
   typography: {
     priceValue: {
-      fontSize: '2.5em',
+      fontSize: '2em',
       color: 'rgb(238,192,67)',
     },
   },

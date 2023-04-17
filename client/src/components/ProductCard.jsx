@@ -58,9 +58,9 @@ function ProductCard({
         alt={title}
         className="product-image"
       />
-      <Stack direction="row" flexWrap="wrap" justifyContent="end">
-
+      <Stack direction="row" flexWrap="wrap" justifyContent="end" alignItems="baseline">
         <Typography variant="h6">{title}</Typography>
+
         <Stack display="flex" alignItems="center" justifyContent="end" width="90%" marginLeft="5%">
 
           {price ? (

@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AppContext from '../context/AppContext';
-import NoQuery from './NoQuery';
 
 function SearchBar() {
   const { handleChange, handleQueryBtn, noQuery } = useContext(AppContext);
@@ -61,7 +60,6 @@ function SearchBar() {
       <Button type="button" onClick={handleQueryBtn}>
         <SearchIcon color="primary" />
       </Button>
-      {noQuery && <NoQuery />}
     </Stack>
   );
 }

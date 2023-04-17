@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Box,
-  Button, Chip, Grid, Modal, Paper, Stack, Typography,
+  Button, Grid, Modal, Paper, Stack, Typography,
 } from '@mui/material';
+import DescriptionIcon from '@mui/icons-material/Description';
 import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
 import formatValues from '../utils/formatValues';
 
@@ -44,12 +45,12 @@ function ProductCard({
           display: 'flex',
           // flexDirection: 'row',
           // flexWrap: 'wrap',
-          // justifyContent: 'center',
+          alignItems: 'center',
         }
       }
     >
       <Box
-        maxWidth="30%"
+        maxWidth="35%"
         borderRadius="5px"
         margin="5px"
         component="img"
@@ -60,25 +61,36 @@ function ProductCard({
       <Stack direction="row" flexWrap="wrap" justifyContent="end">
 
         <Typography variant="h6">{title}</Typography>
-        <Stack alignItems="center" justifyContent="space-around" width="90%" marginLeft="5%">
-          <Chip variant="contained" label="Saiba mais..." onClick={handleOpen} />
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography variant="h6" component="h2">
-                Descrição
-              </Typography>
-              <Typography sx={{ mt: 2 }}>
-                {description}
-              </Typography>
-            </Box>
-          </Modal>
-          <Typography variant="h6" color="Highlight"><strong>{formatValues(price)}</strong></Typography>
+        <Stack display="flex" alignItems="center" justifyContent="end" width="90%" marginLeft="5%">
+
+          {price ? (
+            <Typography
+              variant="h4"
+              color="Highlight"
+            >
+              <strong>{formatValues(price)}</strong>
+
+            </Typography>
+          ) : (
+            <Typography variant="caption" color="tomato">Este produto está indisponível no momento.</Typography>
+          )}
         </Stack>
+        <Button onClick={handleOpen}><DescriptionIcon /></Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography variant="caption" component="h2">
+              Descrição
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Modal>
         <Button onClick={handleWebClick}><StorefrontTwoToneIcon /></Button>
       </Stack>
     </Grid>

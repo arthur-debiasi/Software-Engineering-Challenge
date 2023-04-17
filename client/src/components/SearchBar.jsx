@@ -12,7 +12,7 @@ function SearchBar() {
   return (
     <Stack direction="row" flexWrap="wrap" alignItems="center">
       <Stack direction="row">
-        <FormControl sx={{ minWidth: '150px' }}>
+        <FormControl sx={{ minWidth: '150px', margin: '3px 3px 3px 0px' }}>
           <InputLabel id="web-label">Web</InputLabel>
           <Select
             labelId="web-label"
@@ -30,7 +30,7 @@ function SearchBar() {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ minWidth: '150px' }}>
+        <FormControl sx={{ minWidth: '120px', margin: '3px 3px 3px 0px' }}>
           <InputLabel id="category-label">Categoria</InputLabel>
           <Select
             name="category"
@@ -47,7 +47,7 @@ function SearchBar() {
         </FormControl>
       </Stack>
 
-      <TextField label="Pesquisa" type="text" name="query" id="query" onChange={handleChange} />
+      <TextField label="Pesquisa" type="text" name="query" id="query" onChange={handleChange} sx={{ margin: '3px 3px 3px 0px' }} />
 
       <Button type="button" onClick={handleQueryBtn}>
         <SearchIcon />

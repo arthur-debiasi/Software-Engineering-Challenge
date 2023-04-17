@@ -11,6 +11,7 @@ function Header() {
       flexWrap="wrap"
       justifyContent="space-around"
       alignItems="center"
+      marginBottom={6}
     >
       <HagglesIcon />
       <SearchBar />

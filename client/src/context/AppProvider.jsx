@@ -7,25 +7,28 @@ export default function AppProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noQuery, setNoQuery] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const [queryData, setQueryData] = useState({
     query: '',
     category: 'geladeira',
     web: 'all',
   });
 
-  const handleQueryBtn = useCallback(() => {
+  const handleQueryBtn = useCallback(async () => {
     if (!queryData.query || queryData.query.replaceAll(' ', '') === '') {
       setNoQuery(true);
     } else {
       setNoQuery(false);
+      setNotFound(false);
       setIsLoading(true);
       const { query, category, web } = queryData;
-      axios
-        .post('http://localhost:3001/', { query, category, web })
-        .then(({ data }) => {
-          setProducts(data);
-          setIsLoading(false);
-        });
+      const { data } = await axios
+        .post('http://localhost:3001/', { query, category, web });
+      setProducts(data);
+      if (data.length === 0) {
+        setNotFound(true);
+      }
+      setIsLoading(false);
     }
   }, [queryData]);
 
@@ -35,7 +38,7 @@ export default function AppProvider({ children }) {
   };
 
   const contextValue = useMemo(() => ({
-    products, isLoading, noQuery, handleQueryBtn, handleChange,
+    products, isLoading, noQuery, handleQueryBtn, handleChange, notFound,
   }), [products, isLoading, noQuery, handleQueryBtn, handleChange]);
   return (
     <AppContext.Provider

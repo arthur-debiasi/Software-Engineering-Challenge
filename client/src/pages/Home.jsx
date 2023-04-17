@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import uuid from 'react-uuid';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import ProductCard from '../components/ProductCard';
 import Loading from '../components/Loading';
 import Header from '../components/Header';
 import AppContext from '../context/AppContext';
 
 function Home() {
-  const { isLoading, products } = useContext(AppContext);
+  const { isLoading, products, notFound } = useContext(AppContext);
 
   return (
     <div>
@@ -24,6 +24,9 @@ function Home() {
             justifyContent: 'center',
           }}
         >
+          {notFound && (
+            <Typography variant="overline">Não há resultados para o termo pesquidado.</Typography>
+          )}
           {isLoading ? (
             <Loading />
           ) : (

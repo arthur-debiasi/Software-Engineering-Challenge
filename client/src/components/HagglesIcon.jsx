@@ -7,7 +7,13 @@ const logoDark = '/img/hagglesDark.png';
 
 function HagglesIcon() {
   return (
-    <Box component="img" marginBottom={2} src={theme.palette.mode === 'dark' ? logoDark : logoLight} alt="" width="150px" />
+    <Box
+      component="img"
+      marginBottom={2}
+      src={theme.palette.mode === 'dark' ? logoDark : logoLight}
+      alt=""
+      width="150px"
+    />
   );
 }
 

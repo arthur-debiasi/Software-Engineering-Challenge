@@ -1,21 +1,19 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider } from '@emotion/react';
 import AppProvider from './context/AppProvider';
-
-import theme from './style/theme';
 import AppRoutes from './routes/AppRoutes';
+import ColorModeProvider from './context/ColorModeProvider';
 
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ColorModeProvider>
         <CssBaseline />
         <AppProvider>
           <AppRoutes />
         </AppProvider>
-      </ThemeProvider>
+      </ColorModeProvider>
     </BrowserRouter>
   );
 }

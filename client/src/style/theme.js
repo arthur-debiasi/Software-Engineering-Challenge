@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material';
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
       main: '#A87F10',
     },
@@ -10,7 +10,7 @@ const theme = createTheme({
   typography: {
     priceValue: {
       fontSize: '2em',
-      color: 'rgb(238,192,67)',
+      color: '#A87F10',
     },
   },
 });

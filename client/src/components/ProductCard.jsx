@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box, Button, Grid, Paper, Stack, Typography,
 } from '@mui/material';
@@ -7,6 +7,7 @@ import StorefrontTwoToneIcon from '@mui/icons-material/StorefrontTwoTone';
 import ProductPrice from './ProductPrice';
 import NotFoundMsg from './NotFoundMsg';
 import DescriptionModal from './DescriptionModal';
+import ColorModeContext from '../context/ColorModeContext';
 
 function ProductCard({
   src, title, description, price, href,
@@ -14,6 +15,10 @@ function ProductCard({
   const handleWebClick = () => {
     window.open(href, '_blank');
   };
+  const { mode } = useContext(ColorModeContext);
+
+  const bgColor = mode === 'light' ? 'darkgray' : 'lightgray';
+  const titleColor = mode === 'light' ? 'white' : 'black';
 
   return (
     <Grid
@@ -21,8 +26,7 @@ function ProductCard({
       md={6}
       xs={12}
       component={Paper}
-      elevation={10}
-      sx={{ display: 'flex', alignItems: 'center' }}
+      sx={{ display: 'flex', alignItems: 'center', backgroundColor: bgColor }}
     >
       <Stack
         direction={{ xs: 'column', md: 'row' }}
@@ -43,7 +47,7 @@ function ProductCard({
         />
         <Stack display="flex" justifyContent="space-between" spacing={2}>
           <Stack display="flex" alignItems="center" justifyContent="end" width="90%" marginLeft="5%">
-            <Typography variant="h5">{title}</Typography>
+            <Typography variant="h5" color={titleColor}>{title}</Typography>
             {price ? (<ProductPrice price={price} />) : (<NotFoundMsg />)}
           </Stack>
 

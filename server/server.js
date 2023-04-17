@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const searchProducts = require('./controller/searchProducts');
+
 const app = express();
-const port = 3001;
-const conn = require('./database/connection')
+const port = process.env.PORT;
+const conn = require('./database/connection');
+
 app.use(cors());
 app.use(express.json());
 

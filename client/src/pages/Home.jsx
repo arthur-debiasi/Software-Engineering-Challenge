@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import uuid from 'react-uuid';
-import { Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import ProductCard from '../components/ProductCard';
 import Loading from '../components/Loading';
 import Header from '../components/Header';
@@ -14,6 +14,7 @@ function Home() {
       <header>
         <Header />
       </header>
+      <Divider />
       <main>
         <Grid
           container

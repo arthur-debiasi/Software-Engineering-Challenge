@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import theme from '../style/theme';
+import { Box, useTheme } from '@mui/material';
 
 const logoLight = '/img/hagglesLight.png';
 const logoDark = '/img/hagglesDark.png';
 
 function HagglesIcon() {
+  const theme = useTheme();
   return (
     <Box
       component="img"

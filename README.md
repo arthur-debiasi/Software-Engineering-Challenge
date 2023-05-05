@@ -1,4 +1,4 @@
-# [Lexart](https://lexartlabs.com/) Software Engineering Challenge - [Product Search Engine](https://haggles.up.railway.app/)
+# Software Engineering Challenge - [Product Search Engine](https://haggles.up.railway.app/)
 
 ## 💻 About - [haggles.up.railway.app/](https://haggles.up.railway.app/)
 
